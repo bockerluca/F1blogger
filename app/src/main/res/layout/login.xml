@@ -32,10 +32,10 @@
             android:gravity="top"/>
 
         <EditText
-            android:id="@+id/usernameEditText"
+            android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Felhasználónév"
+            android:hint="Email cím"
             android:layout_below="@id/loginTextView"
             android:layout_margin="20dp"
             android:inputType="text"/>
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Jelszó"
-            android:layout_below="@id/usernameEditText"
+            android:layout_below="@id/emailEditText"
             android:layout_marginHorizontal="20dp"
             android:inputType="textPassword"/>
 
@@ -58,6 +58,15 @@
             android:text="Bejelentkezés"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"/>
+
+        <TextView
+            android:id="@+id/linkToRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loginBtn"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:text="Regisztráció"/>
 
     </RelativeLayout>
 

@@ -41,11 +41,20 @@
             android:inputType="text"/>
 
         <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email cím"
+            android:layout_below="@id/usernameEditText"
+            android:layout_marginHorizontal="20dp"
+            android:inputType="text"/>
+
+        <EditText
             android:id="@+id/password1EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Jelszó"
-            android:layout_below="@id/usernameEditText"
+            android:layout_below="@id/emailEditText"
             android:layout_marginHorizontal="20dp"
             android:inputType="textPassword"/>
 
@@ -55,11 +64,11 @@
             android:layout_height="wrap_content"
             android:hint="Jelszó megerősítése"
             android:layout_below="@id/password1EditText"
-            android:layout_marginHorizontal="20dp"
+            android:layout_margin="20dp"
             android:inputType="textPassword"/>
 
         <Button
-            android:id="@+id/loginBtn"
+            android:id="@+id/registrationBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/password2EditText"
