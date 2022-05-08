@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements ReloadListener {
 
     private TextView noArticle;
 
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements ReloadListener {
         SharedPreferences sharedPref = this.getSharedPreferences("F1BLOGGER", Context.MODE_PRIVATE);
         FloatingActionButton fab = findViewById(R.id.fab);
         noArticle = findViewById(R.id.noArticleTextView);
+        recyclerView = findViewById(R.id.articleList);
+        noArticle.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
 
         TextView userName = findViewById(R.id.nameTextView);
         userName.setText(sharedPref.getString("USERNAME", "user"));
@@ -41,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ReloadListener {
         loadArticles();
 
         fab.setOnClickListener(view -> {
-            DialogActivity dialogActivity = new DialogActivity(this, this);
+            DialogActivity dialogActivity = new DialogActivity(this, this, null);
             dialogActivity.show();
         });
 
@@ -67,22 +72,25 @@ public class MainActivity extends AppCompatActivity implements ReloadListener {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
+
                             Article article = document.toObject(Article.class);
                             article.setDocRef(document.getId());
                             articles.add(article);
-
-                            if (articles.isEmpty()){
-                                noArticle.setVisibility(View.VISIBLE);
-                            }
-
-                            RecyclerView recyclerView = findViewById(R.id.articleList);
-                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                            recyclerView.setLayoutManager(linearLayoutManager);
-                            ArticleListAdapter articleListAdapter = new ArticleListAdapter(this, articles, this);
-                            recyclerView.setAdapter(articleListAdapter);
-                            articleListAdapter.notifyDataSetChanged();
-                            articleListAdapter.notifyItemInserted(articles.size());
                         }
+                        if (articles.isEmpty()){
+                            noArticle.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                        }else{
+                            noArticle.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                        }
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        ArticleListAdapter articleListAdapter = new ArticleListAdapter(this, articles, this);
+                        recyclerView.setAdapter(articleListAdapter);
+                        articleListAdapter.notifyDataSetChanged();
+                        articleListAdapter.notifyItemInserted(articles.size());
                     } else {
                         Toast.makeText(getApplicationContext(),
                                 "Nem sikerült betölteni a cikkekekt!",

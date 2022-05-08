@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         if (emailEditText.getText().toString().length() != 0 && passwordEditText.getText().toString().length() != 0){
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
-            firebaseAuth.signInWithEmailAndPassword("luca.boci@gmail.com", "qweqwe")
+            firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

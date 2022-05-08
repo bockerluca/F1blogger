@@ -1,5 +1,6 @@
 package hu.bockerluca.f1blogger;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,11 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import hu.bockerluca.f1blogger.model.Article;
@@ -25,11 +27,15 @@ public class DialogActivity extends Dialog {
     private Button okButton;
     private Context context;
     private ReloadListener reloadArticles;
+    private Article article;
 
-    public DialogActivity(@NonNull Context context, ReloadListener reloadArticles) {
+    public DialogActivity(@NonNull Context context, ReloadListener reloadArticles, Article article) {
         super(context);
         this.context = context;
         this.reloadArticles = reloadArticles;
+        if(article!= null){
+            this.article = article;
+        }
     }
 
     @Override
@@ -39,6 +45,10 @@ public class DialogActivity extends Dialog {
 
         articleTitle = findViewById(R.id.articleTitleEditText);
         articleContent = findViewById(R.id.articleContentEditText);
+        if(article != null){
+            articleTitle.setText(article.getTitle());
+            articleContent.setText(article.getContent());
+        }
         okButton = findViewById(R.id.okBtn);
         Button cancelButton = findViewById(R.id.cancelBtn);
 
@@ -57,20 +67,37 @@ public class DialogActivity extends Dialog {
         newArticle.setUserName(sharedPref.getString("USERNAME", "noname"));
         assert currentUser != null;
         newArticle.setUserId(currentUser.getUid());
-        newArticle.setDateTime(Calendar.getInstance().getTime().toString());
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy.MMM.dd");
+        newArticle.setDateTime(format.format(Calendar.getInstance().getTime()));
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("articles")
-                .add(newArticle )
-                .addOnSuccessListener(documentReference -> {
-                    reloadArticles.loadArticles();
-                    Toast.makeText(getContext(), "Sikeres mentés!",
-                            Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Sikertelen mentés!",
-                            Toast.LENGTH_SHORT).show();
-                });
+
+        if(article == null){
+            db.collection("articles")
+                    .add(newArticle )
+                    .addOnSuccessListener(documentReference -> {
+                        reloadArticles.loadArticles();
+                        Toast.makeText(getContext(), "Sikeres mentés!",
+                                Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), "Sikertelen mentés!",
+                                Toast.LENGTH_SHORT).show();
+                    });
+        }else{
+            DocumentReference docRef = db.collection("articles").document(this.article.getDocRef());
+            docRef
+                    .set(newArticle)
+                    .addOnSuccessListener(aVoid -> {
+                        reloadArticles.loadArticles();
+                        Toast.makeText(getContext(), "Sikeres mentés!",
+                                Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), "Sikertelen mentés!",
+                                Toast.LENGTH_SHORT).show();
+                    });
+        }
         onBackPressed();
     }
 }

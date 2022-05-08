@@ -24,21 +24,24 @@
             android:id="@+id/loginTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="40dp"
-            android:layout_centerHorizontal="true"
+            android:gravity="top"
             android:text="Bejelentkezés"
-            android:gravity="top"/>
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email cím"
             android:layout_below="@id/loginTextView"
-            android:layout_margin="20dp"
-            android:inputType="text"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Email cím"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/passwordEditText"

@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+import hu.bockerluca.f1blogger.DialogActivity;
 import hu.bockerluca.f1blogger.R;
 import hu.bockerluca.f1blogger.ReloadListener;
 import hu.bockerluca.f1blogger.model.Article;
@@ -73,7 +74,8 @@ public class ArticleListAdapter extends RecyclerView.Adapter{
 
 
                 articleViewHolder.edit.setOnClickListener(view -> {
-
+                    DialogActivity dialogActivity = new DialogActivity(context, reloadArticles, article);
+                    dialogActivity.show();
                 });
 
                 articleViewHolder.delete.setOnClickListener(view -> {
