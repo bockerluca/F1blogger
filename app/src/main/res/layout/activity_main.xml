@@ -10,7 +10,7 @@
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Szia Valaki!"
+        tools:text="Valaki"
         android:textSize="30sp"
         android:paddingHorizontal="20dp"
         android:paddingVertical="20dp"
@@ -18,6 +18,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintRight_toRightOf="parent"
@@ -30,7 +31,7 @@
         android:src="@drawable/add"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRecordList"
+        android:id="@+id/articleList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"

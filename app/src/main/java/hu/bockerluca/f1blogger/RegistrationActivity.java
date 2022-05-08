@@ -1,5 +1,7 @@
 package hu.bockerluca.f1blogger;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,24 +40,40 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void createAccount() {
-        String email = emailEditText.getText().toString();
-        String password = password1EditText.getText().toString();
-        if (this.password1EditText.getText().toString().equals(this.password2EditText.getText().toString())) {
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Sikeres regisztráció!",
-                                    Toast.LENGTH_SHORT).show();
-                            onBackPressed();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Sikertelen regisztráció!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+        if (emailEditText.getText().toString().length() != 0 &&
+                usernameEditText.getText().toString().length()!= 0 &&
+                password1EditText.getText().toString().length()!= 0 &&
+                password2EditText.getText().toString().length()!= 0
+        ){
+            SharedPreferences sharedPref = this.getSharedPreferences("F1BLOGGER" ,Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
 
-                    });
-        } else {
-            Toast.makeText(getApplicationContext(), "Nem egyezik a két jelszó!",
+            String email = emailEditText.getText().toString();
+            String password = password1EditText.getText().toString();
+
+            if (this.password1EditText.getText().toString().equals(this.password2EditText.getText().toString())) {
+                firebaseAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, task -> {
+                            if (task.isSuccessful()) {
+                                editor.putString("USERNAME", usernameEditText.getText().toString());
+                                editor.apply();
+                                Toast.makeText(getApplicationContext(), "Sikeres regisztráció!",
+                                        Toast.LENGTH_SHORT).show();
+                                onBackPressed();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Sikertelen regisztráció!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                        });
+            } else {
+                Toast.makeText(getApplicationContext(), "Nem egyezik a két jelszó!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(), "Minden mező kitöltése kötelező!",
                     Toast.LENGTH_SHORT).show();
         }
+
     }
 }

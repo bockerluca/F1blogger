@@ -48,20 +48,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
  public void singIn() {
-     String email = emailEditText.getText().toString();
-     String password = passwordEditText.getText().toString();
-     firebaseAuth.signInWithEmailAndPassword("luca.boci@gmail.com", "qweqwe")
-             .addOnCompleteListener(this, task -> {
-                 if (task.isSuccessful()) {
-                     FirebaseUser user = firebaseAuth.getCurrentUser();
-                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                     startActivity(intent);
-                     Toast.makeText(getApplicationContext(), "Sikeres belépés!",
-                             Toast.LENGTH_SHORT).show();
-                 } else {
-                     Toast.makeText(getApplicationContext(), "Sikertelen belépés!",
-                             Toast.LENGTH_SHORT).show();
-                 }
-             });
+        if (emailEditText.getText().toString().length() != 0 && passwordEditText.getText().toString().length() != 0){
+            String email = emailEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+            firebaseAuth.signInWithEmailAndPassword("luca.boci@gmail.com", "qweqwe")
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Sikeres belépés!",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Sikertelen belépés!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }else{
+            Toast.makeText(getApplicationContext(), "Minden mező kitöltése kötelező!!",
+                    Toast.LENGTH_SHORT).show();
+        }
+
  }
 }

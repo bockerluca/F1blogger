@@ -1,0 +1,59 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:text="Új cikk"
+        android:gravity="center"
+        android:layout_marginVertical="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/articleTitleEditText"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:hint="A cikk címe"
+        app:layout_constraintTop_toBottomOf="@id/dialogTitle"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:id="@+id/articleContentEditText"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:hint="A cikk tartalma"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@id/articleTitleEditText"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Button
+        android:id="@+id/okBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mentés"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@id/articleContentEditText"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mégsem"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@id/articleContentEditText"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
