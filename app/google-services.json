@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "654657583768",
+    "project_id": "f1-blogger",
+    "storage_bucket": "f1-blogger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654657583768:android:3442e59b6bc2191951eeed",
+        "android_client_info": {
+          "package_name": "hu.bockerluca.f1blogger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654657583768-gfmes61j2pe15r1jqsmn1oi68th0rmbs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB64GTZTPKIKgYSJ7mTw_HHqxMrttDu68E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654657583768-gfmes61j2pe15r1jqsmn1oi68th0rmbs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
