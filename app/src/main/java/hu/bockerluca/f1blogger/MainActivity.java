@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,13 +31,14 @@ public class MainActivity extends AppCompatActivity implements ReloadListener {
     private TextView noArticle;
 
     private RecyclerView recyclerView;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences sharedPref = this.getSharedPreferences("F1BLOGGER", Context.MODE_PRIVATE);
-        FloatingActionButton fab = findViewById(R.id.fab);
+         fab = findViewById(R.id.fab);
         noArticle = findViewById(R.id.noArticleTextView);
         recyclerView = findViewById(R.id.articleList);
         noArticle.setVisibility(View.VISIBLE);
@@ -50,6 +54,15 @@ public class MainActivity extends AppCompatActivity implements ReloadListener {
             dialogActivity.show();
         });
 
+        startAnimation();
+    }
+
+    private void startAnimation() {
+        RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotate.setDuration(5000);
+        rotate.setInterpolator(new LinearInterpolator());
+
+        fab.startAnimation(rotate);
     }
 
     @Override

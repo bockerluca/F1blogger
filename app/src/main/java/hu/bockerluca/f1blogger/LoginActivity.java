@@ -1,26 +1,23 @@
 package hu.bockerluca.f1blogger;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEditText;
     private EditText passwordEditText;
+    private Button loginBtn;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -32,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         TextView linkToRegistration = findViewById(R.id.linkToRegistration);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
-        Button loginBtn = findViewById(R.id.loginBtn);
+         loginBtn = findViewById(R.id.loginBtn);
 
         loginBtn.setOnClickListener(view -> singIn());
 
@@ -40,6 +37,21 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
             startActivity(intent);
         });
+
+        startAnimation();
+    }
+
+    private void startAnimation() {
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(
+                loginBtn,
+                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.2f));
+        scaleDown.setDuration(2000);
+
+        scaleDown.setRepeatCount(ObjectAnimator.INFINITE);
+        scaleDown.setRepeatMode(ObjectAnimator.REVERSE);
+
+        scaleDown.start();
     }
 
     @Override

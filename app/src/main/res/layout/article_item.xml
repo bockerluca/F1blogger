@@ -6,13 +6,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        card_view:cardCornerRadius="4dp"
-        android:elevation="12dp">
+        app:cardElevation="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -23,6 +26,7 @@
             android:id="@+id/itemTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             tools:text="Cím"
             android:layout_marginVertical="20dp"
             android:layout_marginHorizontal="20dp"
@@ -50,6 +54,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginVertical="20dp"
             android:layout_marginHorizontal="20dp"
+            android:textStyle="italic"
             tools:text="xyUser"/>
 
         <TextView
@@ -60,6 +65,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginVertical="20dp"
             android:layout_marginHorizontal="20dp"
+            android:textStyle="italic"
             tools:text="2022.05.07."/>
 
             <ImageButton
